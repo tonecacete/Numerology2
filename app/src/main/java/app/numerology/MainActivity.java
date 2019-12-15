@@ -2,6 +2,7 @@ package app.numerology;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 String nomeStr = name.getText().toString();
                 int resultP = calculator.getNameValue(nomeStr);
                 int lifeNum = calculator.getNrLicaoDeVida(day.getText().toString(),month.getText().toString(),year.getText().toString());
+                hideKeyboard(v);
                 cenaitas.setText(
                         "Número da Lição de Vida: " + lifeNum + "\n"+
                                 "Número do Destino: " + resultP);
@@ -253,6 +256,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 
 }
